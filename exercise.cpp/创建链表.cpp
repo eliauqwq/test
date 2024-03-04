@@ -20,14 +20,36 @@ int main() {
 		s->next = NULL;//记得将最后的节点初始化为NULL
 		p = s;//保证可活动节点P一直处于链表最后处
 	}
-//至此，链表已经完成，但需注意，头节点内的数据域是不含数据的
+	//至此，链表已经完成，但需注意，头节点内的数据域是不含数据的
 	p = head;//将可活动节点p移动到头节点，准备开始卸货
 	while (p->next != NULL)//判断p的下一节点是否为NULL，若不为NULL，说明节点还没有结束
 	{
 		printf("%d", p->next->data);
 		p = p->next;//p节点向后移动
 	}
-
+	printf("\n");
+	//下面进行链表的插入
+	//在一个长度大于等于一的链表的第i个位置和第i+1个位置插入一个链表、
+	p = head;//首先仍将p的位置移动到头节点
+	Node* pre = (Node*)malloc(sizeof(Node));//设置要插入的节点；
+	printf("请输入要插入的数据：");
+	scanf("%d", &pre->data);//导入要插入的数据
+	int m;
+	printf("请输入要插入的位置：");
+	scanf("%d", &m);
+	for (int i = 0; i < m - 1; i++) {
+		p = p->next;//将p移动到第i个结点
+	}
+	Node* q;//创建一个过渡节点，来储存第i+1个节点
+	q = p->next;
+	p->next = pre;//将插入节点插到第i个节点之后
+	pre->next = q;//将第i+1个节点插到插入节点之后
+	p = head;//接下来将链表打印出来检验是否插入成功
+	while (p->next != NULL)//判断p的下一节点是否为NULL，若不为NULL，说明节点还没有结束
+	{
+		printf("%d", p->next->data);
+		p = p->next;//p节点向后移动
+	}
 	return 0;
 }
 
